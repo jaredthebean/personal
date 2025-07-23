@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A technical blog.">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Martian+Mono&family=Newsreader&family=Saira&family=Fira+Code&display=swap"
+    rel="stylesheet">
+  <title>Jared's Name</title>
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="page.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Name</a></li>
+        <li><a href="/résumé/">Résumé</a></li>
+        <li><a href="/tech/">Tech</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="reading">
+      <h1>It's a <code>-&gt;<wbr>Technical<wbr>&lt;-</code> Blog</h1>
+      <section class="intro">
+        <h2>Intro</h2>
+        <p>
+          This is where I do little write-ups about technical things I encounter and find interesting.
+          I'll try to make them more generally accessible than the notes I write to my future selves.
+        </p>
+      </section>
+      <section class="articles">
+        <h2>Article(s)</h2>
+        <section class="intro">
+          <h3>Dev Containers</h3>
+          <p>
+            So I like dev containers<a href="https://containers.dev/" class="cite">1</a>,
+            aka using Docker to keep whatever funniness in a coding project I'm
+            working on from spilling over into the rest of my system. As I don't work on kernel-level things
+            Docker provides all the isolation I'll need.
+          </p>
+          <p>
+            It also keeps me honest in terms of being able to set up a dev environment quickly on something
+            that isn't my home machine. Mostly that boils down to two things:
+          <ol>
+            <li>
+              Keeping my dotfiles well organized and able to pull down "nice-to-have" dev environment
+              dependencies as needed. (If I'm going to be working in the environment that configuration
+              of the basics isn't enough for my <em>comfort</em>.)
+            </li>
+            <li>
+              Staying knowledgeable enough about ways to connect two "environments" together securely and comfortably.
+              SSH, tmux, mounting folders in Docker containers would all fall under this.
+            </li>
+          </ol>
+          <p>
+            Lately, I've realized that while I've definitely gotten pretty comfortable with Docker in terms
+            of a user I didn't really understand its internals or how it did what it did. This put a cap on
+            the level of understanding I had for the various functionalities available in Docker. One thing
+            that brought this to light was needing to connect a X application in a dev container to the X
+            server on the host (aka my laptop) which controlled its display/screen/etc. This brought up a
+            number of questions in my mind.
+          </p>
+          <ul class="questions">
+            <li>
+              <p class="question">Should this be a port forwarding thing? Maybe SSH?</p>
+              <p class="reasoning">
+                A couple of the utilities I had used
+                (VSCode extension & Devpods) really liked those two things when connecting between host and
+                container.
+              </p>
+            </li>
+            <li>
+              <p class="question">What about mounts?</p>
+              <p class="reasoning">
+                I mean the folder mount of my "workspace" in dev containers was the
+                fundamental host ⟷ container communication functionality that made dev containers useful to
+                me. Outside of that, named UNIX domain sockets were how SSH agent forwarding worked as far
+                as I could tell.
+              </p>
+            </li>
+            <li>
+              <p class="question">Does this have something to do with <code>cgroups</code>?</p>
+              <p class="reasoning">I keep seeing that term crop up, but I have no
+                idea what it is? How does Docker even work? What are its component systems and how do I
+                trade-off between them and/or use them "correctly" and not just abuse them in my
+                ignorance?
+              </p>
+            </li>
+          </ul>
+        </section>
+        <section class="history">
+          <h3>History & Context</h3>
+          <p>
+            Anyways, as you can see this kicked off a bunch of questions so I decided to embark.
+            Turns out, as far as I could tell, Docker is kinda a nice convenience layer on top
+            of a bunch on different Linux kernel functionalities that ties them all together to give
+            you a mostly isolated environment. In this respect the most useful learning resource for me
+            wasn't Docker (or container) specific, but was just a book on how Linux works.
+          </p>
+          <p>
+            I mean I've used Linux for nearly two decades now, but looking back on it everything I knew
+            was hobbled together from disparate
+            <code>man</code> pages and noticing things changing as I
+            updated my distro. <q>Oh look,
+              <code>/etc</code> config files now have
+              <code>*.d/</code> folders
+              that the main file tells me to use. Guess I'll do that.
+            </q>
+          </p>
+          <aside>
+            <button></button>
+            <div class="expandable-wrapper">
+              <div class="expandable-content">
+                <p>
+                  Dual-booted Linux on my first laptop: a Dell that had an Nvidia GPU.
+                  Everytime I would update the kernel I would lose access to my GUI and Gnome and only have a
+                  lonely TTY, which started
+                  <code>wpa-supplicant</code> (which was tied to an applet in Gnome or
+                  at whose configuration was somewhere in there at the time?) and so I also lost connectivity
+                  to my university's Wi-Fi.
+                </p>
+                <p>
+                  This meant I couldn't search the forums for how to fix things and even if I did regain Wi-Fi
+                  I couldn't start a GUI browser. This is when I learned how to write configuration for
+                  <code>wpa-supplicant</code> by hand (after using a university computer to search the forums) -
+                  which was no fun - and also how to navigate the TUI, ASCII-art-based, web browser
+                  <a href="https://lynx.browser.org/">Lynx</a> - which was a <em>lot</em> of fun.
+                </p>
+                <p>
+                  I eventually made a script for the unfun part. (As well as messing with X and kernel modules
+                  that normally re-enabled the GUI.) But still got to dive into
+                  <a href="https://lynx.browser.org/">Lynx</a> a good bit as my Nvidia graphics fixes needed
+                  changing fairly frequently as those drivers were changing a good bit.
+                </p>
+              </div>
+            </div>
+          </aside>
+          <p>
+            I knew specific parts of Linux, and more often than not how to do specific things <em>with</em>
+            with those specific parts, but I never really got a "this is how it is all connected" design
+            overview or the rational behind how things progressed and changed. As part of this I also
+            just straight up missed some parts of Linux.
+          </p>
+        </section>
+        <section class="book">
+          <h3>Good Book</h3>
+          <p>
+            What solved this for me was the excellent book
+            <a href="https://nostarch.com/howlinuxworks3">"How Linux Works, 3rd Edition" by Brian Ward</a>
+            and hey it finally answered what
+            <code>cgroups</code> were.
+          </p>
+          <aside>
+            <button></button>
+            <div class="expandable-wrapper">
+              <div class="expandable-content">
+                <p>
+                  <code>cgroups</code>, aka control groups, are mostly about controlling how much of a system's
+                  resources a set of processes use. It is interacted with mostly via the filesystem
+                  (like good ol'
+                  <code>/proc</code>.) Mine is rooted at
+                  <code>/sys/fs/cgroups</code> but a quick
+                  invocation of the
+                  <code>mount</code> should list where the
+                  <code>cgroup2</code> filesystem type
+                  is mounted. For containers you can see how it can provide protection against things like
+                  fork-bombing even outside of multi-tenant environments.
+                </p>
+              </div>
+            </div>
+          </aside>
+        </section>
+        <section class="answers">
+          <h3>Answers</h3>
+          <p>
+            Now that we know that Docker is a convenience layer that bundles together a number of built-in
+            Linux kernel features to make a cohesive API/environment that we can think of as a "container",
+            we can start to answer some of our questions from above.
+          </p>
+          <ul class="answers">
+            <li>
+              <p class="question">Should this be a port forwarding or SSH thing?</p>
+              <div class="answer">
+                <p>
+                  It could be. If we are going to possibly want on dev containers on other machines
+                  connected through a network than this will make that easier. For SSH tunnelling we
+                  need an SSH server <em>in</em> our container which is a bit annoying if we don't need one.
+                </p>
+                <p>
+                  Since X tends to use UNIX domain sockets locally and that is where I was intending to
+                  develop SSH or port forwarding seemed like to much. Also opening up an X network port seemed
+                  iffy since it has all the naïve trusting tendencies of software developed in the 1980's. I mean
+                  that's why you always tunnel it with SSH (well that and because SSH has built-in, specialized,
+                  packet-sniffing support for X protocol tunnelling, sheesh.)
+                </p>
+                <aside>
+                  <button></button>
+                  <div class="expandable-wrapper">
+                    <div class="expandable-content">
+                      <p>
+                        I guess I should note that using SSH to port forward the host X server listening
+                        on a TCP port into the Docker container so that its X clients can connect
+                        <em>is</em> an alternative solution, and the one I would go with if I needed to support
+                        things like connecting to my Dev Container over a network. I don't need that (yet),
+                        so I didn't.
+                      </p>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </li>
+            <li>
+              <p class="question">Mounts?</p>
+              <div class="answer">
+                <p>
+                  Yeah this is what we were looking for. X uses named UNIX domain sockets that show
+                  up in the filesystem, I'm using this for local development, its all coming together.
+                </p>
+                <aside>
+                  <button></button>
+                  <div class="expandable-wrapper">
+                    <div class="expandable-content">
+                      <p>
+                        As it turns out X hardcodes where it puts its UNIX domain sockets
+                        <a href="https://github.com/Martin1994/xcb-libxcb/blob/be1745c8eb00defcb31d336ccc142de056e92bd8/src/xcb_util.c#L232"
+                          class="cite">
+                          2
+                        </a>
+                        so we don't really need to do much fancy footwork (enforce a configuration or
+                        read an environment variable or <em>anything</em> except know that this is the
+                        right and true folder for X server UNIX domain sockets.)
+                      </p>
+                      <p>
+                        This does make mounting it in Docker a <em>little</em> annoying as other
+                        things like to mount a RAM <code>tmpfs</code> filesystem to <code>/tmp</code>. In
+                        particular the Docker in Docker feature for Dev Containers likes to do so in
+                        its container startup script
+                        <a
+                          href="https://github.com/devcontainers/features/blob/e3e3ed76c4778e1ec51cae7c11e74565d0052a7f/src/docker-in-docker/install.sh#L524-L526">
+                          3
+                        </a>.
+                        If we must mount a <em>subfolder</em> (or file) of <code>/tmp</code> then
+                        it'll get kludged by this script. So I mount <code>/tmp</code> as a RAM
+                        filesystem ahead of time because the Docker in Docker container script is
+                        kind enough to check for that at least.
+                      </p>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </li>
+            <li>
+              <p class="question">
+                Control Groups?
+              </p>
+              <div class="answer">
+                <p>
+                  As noted above, no this has nothing to do with what we are attempting.
+                  It is just the kernel feature that allows Docker to do host resource
+                  limiting per container.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <section class="future">
+          <h3>Onwards</h3>
+          <p>
+            Well we found our solution and I got to learn more about how Docker & containers in
+            general work so that's cool.
+          </p>
+          <p>
+            Among the various kernel features that bundled up by Docker to make containers
+          </p>
+          <ul>
+            <li>
+              <p>Capabilites</p>
+            </li>
+            <li>
+              <p>Mounts</p>
+            </li>
+            <li>
+              <p>Control Groups</p>
+            </li>
+            <li>
+              <p>Namespaces</p>
+            </li>
+            <li class="chosen">
+              <p>Networking</p>
+            </li>
+          </ul>
+          <p>
+            I think I want to dig a little more into the networking bit next.
+            Understand iptables (or its successor if that is in prime time now), maybe some traffic
+            control? Basically understand what the capabilities are here so I have that as another
+            tool in my toolbelt when needing to configure my machine for productivity and comfort.
+          </p>
+          <p>
+            Thanks for joining me on this. TTYL.
+          </p>
+        </section>
+      </section>
+    </div>
+  </main>
+  <script>
+    for (const b of document.querySelectorAll("aside > button:first-child")) {
+      b.addEventListener("click", evt => evt.target.parentElement.classList.toggle("expand"));
+    }
+    for (const b of document.querySelectorAll("aside")) {
+      b.addEventListener(
+        "click", evt => 
+        {
+          if (!evt.target.classList.contains("expand")) {
+            evt.target.classList.toggle("expand")
+          }
+        }
+      );
+    }
+  </script>
+</body>
+
+</html>

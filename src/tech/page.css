@@ -1,0 +1,116 @@
+code {
+	font-family: "Fira Code", "Courier New", Courier, monospace;
+}
+
+section.intro {
+	border-image: linear-gradient(
+			90deg,
+			rgb(0 0 0 / 50%),
+			rgb(0 0 0 / 12.5%),
+			rgb(0 0 0 / 50%)
+		)
+		100% 0 / 0 0 1px 0;
+	padding-block-end: 2.5ch;
+	margin-block-end: 5ch;
+}
+
+p.reasoning,
+.answer p:first-of-type {
+	text-indent: 2ch;
+}
+
+.articles {
+	section {
+		border-image: linear-gradient(
+				90deg,
+				lab(from var(--rose) l a b / 5%),
+				lab(from var(--rose) l a b / 25%),
+				lab(from var(--rose) l a b / 5%)
+			)
+			100% 0 / 0 0 1px 0;
+		padding-block-end: 1ch;
+		margin-block-end: 3ch;
+	}
+
+	& > div > p:first-of-type {
+		text-indent: 2ch;
+	}
+
+	aside {
+		margin-inline-start: auto;
+		margin-inline-end: 0;
+		background-color: lab(from var(--rose) l a b / 70%);
+		padding: 1ch 1.5ch;
+		border-radius: 1em;
+		width: 100%;
+		transition: width 0.2s;
+		button {
+			margin-inline-start: auto;
+			margin-inline-end: 0;
+			display: block;
+		}
+
+		.expandable-wrapper {
+			display: grid;
+			grid-template-rows: 0fr;
+			overflow: hidden;
+			transition: grid-template-rows 0.6s;
+
+			.expandable-content {
+				min-height: 0;
+			}
+		}
+
+		:visited {
+			color: lab(from var(--gray) calc(l - 20) a b);
+			border-bottom-color: lab(from var(--gray) calc(l - 20) a b);
+		}
+	}
+
+	aside:not(.expand) {
+		width: 3em;
+		.expandable-wrapper {
+			transition: grid-template-rows, 0.2s;
+		}
+		button:first-child {
+			display: block;
+
+			&::before {
+				content: "↡";
+			}
+		}
+	}
+
+	aside.expand {
+		.expandable-wrapper {
+			grid-template-rows: 1fr;
+		}
+
+		button:first-child::before {
+			content: "↟";
+		}
+	}
+}
+
+h1 {
+	code {
+		font-style: oblique;
+	}
+}
+
+ul.answers {
+	li {
+		margin-block: 1ch;
+	}
+
+	ul {
+		list-style: none;
+	}
+}
+
+a.cite {
+	text-decoration: none;
+	font-size: 50%;
+	vertical-align: super;
+	color: lab(from var(--aero) calc(l - 10) a b);
+}

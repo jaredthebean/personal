@@ -1,0 +1,131 @@
+:root {
+	--ivory: lab(95% -3 8);
+	--aero: lab(73% -17 -30);
+	--onyx: lab(24% -1 -2);
+	--gray: lab(59% 7 -11);
+	--rose: lab(62% 17 -7);
+	--max-width: 1200px;
+	--reading-width: 900px;
+	--blur-width: min(
+		/*
+        We blur the vertical edges of the box to a maximum of the max gutter around the reading section.
+        This is <main>'s max width minus the reading <div>'s max width (divided by 2 since there are
+        gutters on both sides).  We subtract off a little more so the blur doesn't come right up to
+        the edge of the text.
+        */
+		calc(calc(calc(var(--max-width) - var(--reading-width)) / 2) - 7ch),
+		/* 
+        If the viewport's width hasn't exceeded our <main>'s max-width then we don't blur.
+        We _could_ start blurring once we exceeded the reading <div>'s max-width, but we choose not
+        to as of now.
+        */
+		max(1ch, calc(calc(100vw - var(--max-width)) / 2))
+	);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	color: var(--onyx);
+	margin: 0;
+	padding: 0;
+	background-color: lab(from var(--ivory) calc(l + 5) a b);
+	font-family:
+		Newsreader, Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text",
+		"Times New Roman", serif;
+	font-size: 18px;
+}
+
+body {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+}
+
+body > * {
+	max-width: var(--max-width);
+	width: 100%;
+	mask:
+		linear-gradient(to top, black 0%, black 100%) no-repeat center / 100% 100%
+		subtract,
+		linear-gradient(to left, transparent 0%, black 100%) no-repeat left /
+		var(--blur-width) 100% add,
+		linear-gradient(to bottom, transparent 0%, black 100%) no-repeat bottom /
+		100% 10px,
+		linear-gradient(to right, transparent 0%, black 100%) no-repeat right /
+		var(--blur-width) 100% add,
+		linear-gradient(to top, transparent 0%, black 100%) no-repeat top / 100%
+		10px add;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	padding-inline-start: 25px;
+	list-style: "-	";
+	tab-size: 2;
+}
+
+header {
+	background: lab(from var(--aero) calc(l + 7) a b);
+	padding-block: 1ch;
+
+	@media (width >= 700px) {
+		padding-block: 2ch;
+	}
+}
+
+nav ul {
+	display: flex;
+	list-style: none;
+	justify-content: space-evenly;
+	gap: 1ch;
+	flex-flow: row wrap;
+	padding: 1ch;
+}
+
+li a {
+	text-decoration: none;
+	padding: 0.25rem 1rem;
+	border-bottom: thin solid var(--onyx);
+}
+
+:link {
+	color: var(--onyx);
+}
+
+:visited {
+	color: lab(from var(--gray) calc(l - 10) a b);
+	border-bottom-color: lab(from var(--gray) calc(l - 10) a b);
+}
+
+main {
+	display: flex;
+	justify-content: center;
+	background-color: var(--ivory);
+	min-height: 100vh;
+	padding: 10px 1ch;
+
+	.reading {
+		max-width: var(--reading-width);
+		width: 100%;
+	}
+}
+
+h1 {
+	padding: 0.2em 0 0.05em 0.5rem;
+	margin: 0 0 0.2em;
+	font-size: 54px;
+}
+
+h2 {
+	font-size: 30px;
+}
+
+p {
+	margin: 1ex 0 1ex 0.25rem;
+	line-height: 115%;
+}

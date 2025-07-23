@@ -1,0 +1,16 @@
+repos:
+  - repo: https://github.com/biomejs/pre-commit
+    rev: v2.1.2 # Use the sha / tag you want to point at
+    hooks:
+      - id: biome-check
+  - repo: local
+    hooks:
+      - id: html-validate
+        name: Nu HTML validator
+        entry: ./scripts/validate-html.sh
+        language: script
+        files: \.html$
+  - repo: https://github.com/koalaman/shellcheck-precommit
+    rev: v0.9.0
+    hooks:
+      - id: shellcheck

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jared Bean's Résumé">
+  <title>Résumé</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Martian+Mono&family=Newsreader&family=Saira&family=Fira+Code&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="page.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Name</a></li>
+        <li><a href="/résumé/">Résumé</a></li>
+        <li><a href="/tech/">Tech</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="reading">
+      <h1>Résumé</h1>
+      <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+          <li>
+            <span class="title">Languages</span>
+            <ol>
+              <li>Python</li>
+              <li>TypeScript</li>
+              <li>CSS</li>
+              <li>(modern) C++</li>
+              <li>Golang</li>
+              <li>Kotlin</li>
+            </ol>
+          </li>
+          <li>
+            <span class="title">Tech</span>
+            <ol>
+              <li>Docker</li>
+              <li>PostgreSQL</li>
+              <li>FastAPI</li>
+              <li>Flask</li>
+              <li>K8s</li>
+              <li>React</li>
+              <li>AWS</li>
+              <li>Terraform</li>
+              <li>ElectronJS</li>
+              <li>Android</li>
+            </ol>
+          </li>
+        </ul>
+      </section>
+      <section id="experience">
+        <h2>Experience</h2>
+        <div id="trunk">
+          <p class="fields">
+            <span class="company">Trunk Technologies</span>
+            <span class="tenure">Short Tenure 2024</span>
+            <span class="title">Senior Software Engineer</span>
+            <span class="team">Platform Team</span>
+          </p>
+          <p class="description">
+            Worked mostly on identity and authz (authentication and authorization) design.
+            Also got some experience with Datadog by instrumenting a common lib to measure some
+            needed performance metrics.
+          </p>
+        </div>
+        <div id="coalition">
+          <p class="fields">
+            <span class="company">Coalition, Inc.</span>
+            <span class="tenure">2023 - 2024</span>
+            <span class="title">Senior Software Engineer</span>
+            <span class="team">Servicing Team</span>
+          </p>
+          <p class="description">
+            Worked in Golang mostly. Built a service to route different customer service requests to
+            different teams based on who was best able to handle them. Did a good bit of back-and-forth
+            with internal (non-technical) teams to get it just right. Somehow it was my first real
+            experience of encoding and improving a previously spreadsheet based "solution".
+          </p>
+        </div>
+        <div id="duolingo">
+          <p class="fields">
+            <span class="company">Duolingo</span>
+          </p>
+          <div id="security">
+            <p class="fields">
+              <span class="title">Senior Software Engineer</span>
+              <span class="team">Learning App Security Team</span>
+              <span class="tenure">2022 - 2023</span>
+            </p>
+            <div class="description">
+              <p>
+                Tried to protect Duolingo from various spam and abuse threats as the sole full-time
+                employee on the case (others would join during an outage/"war room".)
+              </p>
+              <p>
+                I was kinda all over the place here technologically. Got some (more) experience in 
+                Android and browser frontends as I added a CAPTCHA to protect the sign-up flow
+                (with a tiny dip of the toes in iOS.) It was my first time using a paid DDoS product
+                as well.  Shout out to Fastly for being really nice to work with. And of course did
+                my standard backend type work in Python (and some Java.)
+              </p>
+              <p>
+                Did some standard anti-spam & abuse protections work for user-generated content by
+                finding existing signals, analyzing them to discover decent combinations and
+                thresholds that seemed to differentiate known good accounts vs known bad accounts,
+                and then used those thresholds to create rules to deny probable spammers from doing
+                a protected action ("posting", creating an account, etc.)
+              </p>
+            </div>
+          </div>
+          <div id="anti-cheat">
+            <p class="fields">
+              <span class="title">
+                Senior Software Engineer
+              </span>
+              <span class="team">
+                English Test; Anti-Cheat Team
+              </span>
+              <span class="tenure">
+                2020 - 2022
+              </span>
+            </p>
+            <div class="description">
+              <p>
+                Well the English Test product got real popular over the pandemic so the first bit
+                of this was just scaling the tech and making sure it didn't fall over. There wasn't
+                as much to do here as I initially feared besides watch the numbers go up as we
+                built it well, and there are <em>only so many</em> students taking English exams
+                even if you hit 100% market share. Still 20x growth over a month or two can make any
+                SWE nervous. Excited, but nervous.
+              </p>
+              <p>
+                Shortly thereafter the main goal became ensuring the integrity of our test in terms
+                of anti-cheat functionality. I founded and headed up that team. We moved the app
+                from being browser-based to an ElectronJS desktop app. This let us keep a lot of our
+                familiar webdev-y code of which the company had an excellent pool of talent, and I
+                could focus on providing a good C++ glue layer to give us access to desktop APIs in
+                TypeScript land for all the anti-cheat signals we needed.
+              </p>
+              <p>
+                An interesting engineering challenge to be sure, but probably my favorite part was
+                mentoring all the new hires that came on at that time and growing them with good
+                tasks suitable to their level. By the time I left the team was more than capable to
+                operate without me.
+              </p>
+              <p>
+                Oh yeah, I also lead the company internal Python users group during this time as
+                well as helped maintain the internal Python library used by Duolingo's backend 
+                services.
+              </p>
+            </div>
+          </div>
+          <div id="english-test-senior">
+            <p class="fields">
+              <span class="title">
+                Senior Software Engineer
+              </span>
+              <span class="team">
+                English Test Team
+              </span>
+              <span class="tenure">
+                2019 - 2020
+              </span>
+            </p>
+            <div class="description">
+              <p>
+                A simpler time - or perhaps one with different challenges. The English Test team
+                was still a singular team and not a sub-org at Duolingo. Market share was quite
+                small and all we were trying to do was get noticed by the big universities and
+                attract more users.
+              </p>
+              <p>
+                Worked on ads and setting up our ads/performance marketing team for success -
+                mostly by setting up metrics tracking and doing 1001 UI and product experiments.
+                Did get us 80% YoY growth, though this would be dwarfed soon enough. Also did a
+                good bit of JavaScript/TypeScript bloat reduction that improved our load
+                performance (30%). Got some "free" SEO and ads cost reduction (-35%) from that.
+                Always nice to see real world goodies come from performance improvements. It
+                appeases my engineering soul I think.
+              </p>
+              <p>
+                Also got my first taste of mentorship when the first junior engineer joined the
+                team.  Soon <em>they</em> were the ones doing the 1001 UI experiments though I did
+                help them transition the code base to TypeScript and React.
+              </p>
+            </div>
+          </div>
+          <div class="english-test-junior">
+            <p class="fields">
+              <span class="title">Software Engineer II</span>
+              <span class="team">English Test Team</span>
+              <span class="tenure">2018 - 2019</span>
+            </p>
+            <div class="description">
+              <p>
+                Needed a year to prove that I was a senior engineer. Was kinda nice to have the
+                pressure at a lower setting for that time.
+              </p>
+              <p>
+                Mostly got us off of a technically working, but full of pitfalls and potholes
+                homegrown JavaScript 'compiler'.
+                Webpack was a dream comparatively (and is what I moved us to.)
+              </p>
+              <p>
+                Also did a lot of work on switching up how the entire exam worked: big UI changes,
+                big backend changes, support for productionizing new grading models - the works.
+                Basically a new product by the end of it.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="google">
+          <p class="fields">
+            <span class="company">Google</span>
+            <span class="title">Software Engineer III <span class="explain">(aka new undergrad)</span></span>
+            <span class="team">Common Abuse Team</span>
+            <span class="tenure">2015 - 2016</span>
+          </p>
+          <p>
+            First job out of college. Glad to have really great teammates. First time working across
+            time-zones (Singapore - Brazil - San Francisco.) Mostly worked on making a common
+            front-end infrastructure so that different Google products could have customizable
+            "report-abuse" flow that reported this abuse to us in systematic way with good
+            metadata.
+          </p>
+          <p>
+            I did mostly Android on the front-end (with other team members covering iOS and web) and
+            the backend jobs to product good metrics (counts, etc.) and other signals from these
+            reports.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>

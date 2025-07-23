@@ -1,0 +1,144 @@
+h1 {
+	font-family:
+		"Pinyon Script", Garamond, "Calisto MT", "Times New Roman", serif;
+	font-size: 54px;
+}
+
+h2 {
+	margin: 1rem 0;
+}
+
+#skills {
+	border-image: linear-gradient(
+			90deg,
+			rgb(0 0 0 / 50%),
+			rgb(0 0 0 / 12.5%),
+			rgb(0 0 0 / 50%)
+		)
+		100% 0 / 0 0 1px 0;
+	padding-block-end: 2.5ch;
+	margin-block-end: 5ch;
+
+	ul {
+		display: grid;
+		list-style: none;
+		grid: auto / [title-start] fit-content(50ch) [title-end list-start] 1fr [list-end];
+		column-gap: 1ch;
+
+		> li {
+			display: contents;
+
+			> span {
+				font-weight: bold;
+			}
+
+			ol {
+				display: flex;
+				flex-flow: row wrap;
+				padding: 0;
+				flex: 1 1 auto;
+				column-gap: 1ch;
+
+				li {
+					display: initial;
+				}
+			}
+		}
+	}
+}
+
+#experience {
+	.fields {
+		display: grid;
+		grid-template-areas:
+			"company . tenure"
+			"title . team";
+		grid-template-columns: minmax(min-content, max-content) 1fr minmax(
+				min-content,
+				max-content
+			);
+		row-gap: 0.5ch;
+
+		.company {
+			grid-area: company;
+			font-weight: bold;
+			font-size: 110%;
+		}
+
+		.tenure {
+			grid-area: tenure;
+			color: lab(from var(--rose) calc(l - 25) a b);
+		}
+
+		.title {
+			grid-area: title;
+			/* stylelint-disable-next-line declaration-property-value-no-unknown */
+			text-shadow: lab(from currentcolor l a b / 50%) 1px 0 2px;
+			font-size: 100%;
+
+			.explain {
+				text-shadow: initial;
+				font-size: initial;
+				color: var(--ivory);
+			}
+
+			&:hover .explain {
+				color: var(--onyx);
+			}
+		}
+
+		.team {
+			grid-area: team;
+			font-style: oblique;
+			font-size: 115%;
+		}
+
+		.company,
+		.title {
+			font-family: "Martian Mono", "Courier New", Courier, monospace;
+			line-height: 120%;
+		}
+
+		.tenure,
+		.team {
+			justify-self: self-end;
+			text-align: end;
+			align-content: end;
+			font-family: Saira, "Courier New", Courier, monospace;
+		}
+	}
+
+	> div {
+		border-image: linear-gradient(
+				90deg,
+				lab(from var(--rose) l a b / 5%),
+				lab(from var(--rose) l a b / 25%),
+				lab(from var(--rose) l a b / 5%)
+			)
+			100% 0 / 0 0 1px 0;
+		padding-block-end: 1ch;
+		margin-block-end: 3ch;
+
+		&:last-child {
+			border-image: none;
+		}
+	}
+
+	#duolingo {
+		> div {
+			border-image: linear-gradient(
+					90deg,
+					#0000,
+					lab(from var(--rose) l a b / 45%),
+					#0000
+				)
+				100% 0 / 0 0 1px 0;
+			padding-block-end: 0.5ch;
+			margin-block-end: 1.5ch;
+
+			&:last-child {
+				border-image: none;
+			}
+		}
+	}
+}
