@@ -78,6 +78,12 @@ header {
 	}
 }
 
+nav {
+	display: grid;
+	grid-template-columns: [img-start] 100px [img-end links-start] 1fr [links-end];
+	padding: 0 0 0 calc(var(--blur-width) * 0.7);
+}
+
 nav ul {
 	display: flex;
 	list-style: none;
@@ -85,6 +91,7 @@ nav ul {
 	gap: 1ch;
 	flex-flow: row wrap;
 	padding: 1ch;
+	align-self: center;
 }
 
 nav li a {
