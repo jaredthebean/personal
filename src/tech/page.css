@@ -110,7 +110,14 @@ ul.answers {
 
 a.cite {
 	text-decoration: none;
-	font-size: 50%;
+	font-size: 75%;
 	vertical-align: super;
-	color: lab(from var(--aero) calc(l - 10) a b);
+	color: lab(from var(--aero) calc(l - 30) a b);
+	font-weight: bold;
+}
+.future li.chosen {
+	list-style: "⛤ ";
+	font-weight: bold;
+	text-decoration: underline double;
+	text-decoration-skip-ink: none;
 }

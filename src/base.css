@@ -87,7 +87,7 @@ nav ul {
 	padding: 1ch;
 }
 
-li a {
+nav li a {
 	text-decoration: none;
 	padding: 0.25rem 1rem;
 	border-bottom: thin solid var(--onyx);
