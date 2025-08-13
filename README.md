@@ -16,6 +16,7 @@ script that passes the source through a couple minifiers and outputs it in `dist
 ### Clean Command
 ```sh
 rm -r build/
+rm -r dist/
 ```
 
 ## Stack
