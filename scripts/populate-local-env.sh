@@ -1,9 +1,9 @@
 #!/bin/sh
 
-echo "What bucket are we deploying to?";
-read -r BUCKET;
-echo "What is the ID of the Cloudfront distribution we are fronting the bucket with?";
-read -r CLOUDFRONT_ID;
+echo "What bucket are we deploying to?"
+read -r BUCKET
+echo "What is the ID of the Cloudfront distribution we are fronting the bucket with?"
+read -r CLOUDFRONT_ID
 
 # local.env script template
 cat <<EOF

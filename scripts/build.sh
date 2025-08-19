@@ -48,5 +48,5 @@ find "${CRITICAL_CSS}" -name '*.html' \
   -exec mv '{}.critical' '{}' \;
 
 # Export to dist
-mkdir -p "${FINAL}" 
+mkdir -p "${FINAL}"
 cp -r "${CRITICAL_CSS}/." "${FINAL}"
