@@ -17,6 +17,14 @@ script that passes the source through a couple minifiers and outputs it in `dist
 ```sh
 rm -r build/ dist/
 ```
+### Deployment
+I use an S3 bucket in static website mode fronted by Amazon's CDN (Cloudfront.)
+
+The website is deployed in a green-blue style to S3. In effect, the bucket has
+two folders - one called `/green` and the other `/blue` that I swap static
+resource uploads between.  After I deploy the new code to the non-live stage
+I point the Cloudfront distribution to its path and invalidate all paths in
+that distribution.  Still need cache-busting for end-user browser caches though.
 
 ## Stack
  - [`pnpm`](https://pnpm.io/) for managing my dependencies.
