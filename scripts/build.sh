@@ -19,6 +19,7 @@ FINAL="dist"
 SCRIPTS="scripts"
 
 #  Minify HTML
+echo "Minifying HTML"
 HTML="${BUILD}/html"
 mkdir -p "${HTML}"
 cp -r "${SRC}"/. "${HTML}"
@@ -27,11 +28,13 @@ find "${HTML}" -name '*.html' \
   -exec mv '{}.min' '{}' \;
 
 # Subfont
+echo "Running Subfont"
 SUBFONT="${BUILD}/subfont"
 mkdir -p "${SUBFONT}"
 pnpm exec subfont --no-fallbacks --font-display "block" --inline-css -r -o "${SUBFONT}" "${HTML}"
 
 # Minify CSS
+echo "Minifying CSS"
 MINIFY_CSS="${BUILD}/lightning"
 mkdir -p "${MINIFY_CSS}"
 cp -r "${SUBFONT}"/. "${MINIFY_CSS}"
@@ -40,6 +43,7 @@ find "${MINIFY_CSS}" -name '*.css' \
   -exec mv '{}.lightning' '{}' \;
 
 # Inline 'above-the-fold' critical CSS
+echo "Inlining 'above-the-fold' 'critical' CSS"
 CRITICAL_CSS="${BUILD}/critical"
 mkdir -p "${CRITICAL_CSS}"
 cp -r "${MINIFY_CSS}"/. "${CRITICAL_CSS}"
@@ -48,5 +52,6 @@ find "${CRITICAL_CSS}" -name '*.html' \
   -exec mv '{}.critical' '{}' \;
 
 # Export to dist
+echo "Exporting to dist/"
 mkdir -p "${FINAL}"
 cp -r "${CRITICAL_CSS}/." "${FINAL}"
